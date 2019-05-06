@@ -1,9 +1,7 @@
-# see https://hub.docker.com/r/phuslu/goproxy-php/
-FROM golang:alpine
+FROM golang:1.8.0-alpine
+ADD . /go/src/github.com/phuslu/server.php-go
+WORKDIR /go/src/github.com/phuslu/server.php-go
 RUN apk update && \
-    apk add curl && \
-    curl -L "https://github.com/phuslu/goproxy/archive/server.php-go.tar.gz" | gzip -d | tar xv && \
-    cd goproxy-server.php-go && \
     env CGO_ENABLED=0 \
     go build -v -ldflags="-s -w" -o /goproxy-php
 
